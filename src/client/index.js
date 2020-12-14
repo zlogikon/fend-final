@@ -15,10 +15,12 @@ export {
     
 }
 
+const genBttn = document.getElementById("generate");
+
 genBttn.addEventListener("click", function() {
-    feelings = document.getElementById('feelings').value;
-    zip = document.getElementById('zip').value;
-    owAPI = owURL+zip+owCountry+appid+owKey;
+    const feelings = document.getElementById('feelings').value;
+    const zip = document.getElementById('zip').value;
+    //const owAPI = owURL+zip+owCountry+appid+owKey;
       
     //for testing
     
@@ -26,17 +28,17 @@ genBttn.addEventListener("click", function() {
     console.log(feelings);
     //document.getElementById("date").innerHTML = "Date: " + newDate;
     //document.getElementById("temp").innerHTML = "Weather: " + myWeather + " &#8457;";
-    //document.getElementById("content").innerHTML = "Journal entry: " + feelings;
+    document.getElementById("content").innerHTML = "Journal entry: " + feelings;
   
-    getDate()
+    /*getDate()
     getWeather()
     .then(() => {
       //console.log(data)
       postData('/add', {newDate, feelings, myWeather});
     })
     .then(() => {
-      updateUI()
-    })
+      updateUI() */
+    
     
       
     
