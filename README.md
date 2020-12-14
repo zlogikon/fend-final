@@ -4,7 +4,7 @@ This project was created as part of Udacity's Front End Design Nanodegree progra
 
 The project was designed to give experience working with node.js and web APIs.
 
-
+This is a new line
 
 ## Overview
 This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
