@@ -26,19 +26,20 @@ genBttn.addEventListener("click", function() {
     const d = new Date();
     const duration = (endDate.getTime() - startDate.getTime())/60000/60/24;
     const hoursTill = (startDate.getTime() - d.getTime())/60000/60/24;
-    const d1 = startDate.toUTCString().split('00');
-    const d2 = endDate.toUTCString().split('00');
+    const d1 = startDate.toUTCString().slice(0,17);
+    const d2 = endDate.toUTCString().slice(0,17);
 
     //const owAPI = owURL+zip+owCountry+appid+owKey;
       
-    //for testing
-    //console.log(d);
+    // for testing
+    //console.log(d1);
+    //console.log(d2);
     //console.log(startDate);
     //console.log(endDate);
 
     document.getElementById("disDest").innerHTML = `Destination: ${destination}`;
-    document.getElementById("disStart").innerHTML = `Start Date: ${d1[0]}`
-    document.getElementById("disEnd").innerHTML = `End Date: ${d2[0]}`
+    document.getElementById("disStart").innerHTML = `Start Date: ${d1}`
+    document.getElementById("disEnd").innerHTML = `End Date: ${d2}`
     document.getElementById("disDur").innerHTML = `Trip Duration: ${(duration)} days`;
     document.getElementById("disTill").innerHTML = `Countdown: About ${Math.ceil(hoursTill)} days`;
   
