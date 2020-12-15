@@ -27,12 +27,12 @@ app.use(express.static('dist'));
 
 // Setup Server
 
-const port = 5022;
+const port = 8081;
 
-const server = app.listen(port, listening);
+const server = app.listen(port, running);
 
-function listening(){
-  console.log(`Server is running on localhost: ${port}`);
+function running(){
+  console.log(`Server is running on localhost:${port}`);
 }
 
 app.get('/all', sendUserData)
@@ -45,6 +45,10 @@ function sendUserData (req, res) {
 app.post('/add', addUserData)
 
 function addUserData (req, res) {
-    projectData = req.body;
-    console.log(projectData)
+    const reqData = req.body;
+    console.log(reqData)
+
+    //geonames
+    //getWeather
+    //pixabay
 };
