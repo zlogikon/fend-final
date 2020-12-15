@@ -1,7 +1,6 @@
-import { postData } from './js/functions'
-import { getDate } from './js/functions'
-import { getWeather } from './js/functions'
-import { updateUI } from './js/functions'
+import { postData } from './js/app'
+import { getWeather } from './js/app'
+import { updateUI } from './js/app'
 
 import './styles/style.scss'
 
@@ -11,35 +10,52 @@ export {
     getWeather,
     postData,
     updateUI,
-    getDate
+    
     
 }
 
 const genBttn = document.getElementById("generate");
 
 genBttn.addEventListener("click", function() {
-    const feelings = document.getElementById('feelings').value;
-    const zip = document.getElementById('zip').value;
+    // Data collected from user
+    const startDate = new Date(document.getElementById('start').value);
+    const endDate = new Date(document.getElementById('end').value);
+    const destination = document.getElementById('dest').value;
+       
+    // Dates used in results
+    const d = new Date();
+    const duration = (endDate.getTime() - startDate.getTime())/60000/60/24;
+    const hoursTill = (startDate.getTime() - d.getTime())/60000/60/24;
+    const d1 = startDate.toUTCString().split('00');
+    const d2 = endDate.toUTCString().split('00');
+
     //const owAPI = owURL+zip+owCountry+appid+owKey;
       
     //for testing
-    
-    console.log(zip);
-    console.log(feelings);
-    //document.getElementById("date").innerHTML = "Date: " + newDate;
-    //document.getElementById("temp").innerHTML = "Weather: " + myWeather + " &#8457;";
-    document.getElementById("content").innerHTML = "Journal entry: " + feelings;
+    //console.log(d);
+    //console.log(startDate);
+    //console.log(endDate);
+
+    document.getElementById("disDest").innerHTML = `Destination: ${destination}`;
+    document.getElementById("disStart").innerHTML = `Start Date: ${d1[0]}`
+    document.getElementById("disEnd").innerHTML = `End Date: ${d2[0]}`
+    document.getElementById("disDur").innerHTML = `Trip Duration: ${(duration)} days`;
+    document.getElementById("disTill").innerHTML = `Countdown: About ${Math.ceil(hoursTill)} days`;
   
-    /*getDate()
-    getWeather()
+    
+    
+  postData('/add', {destination, startDate, endDate})
     .then(() => {
-      //console.log(data)
-      postData('/add', {newDate, feelings, myWeather});
-    })
-    .then(() => {
-      updateUI() */
-    
-    
-      
-    
+      updateUI()   
+    });
   });
+
+cancel.addEventListener("click", function() {
+  document.getElementById("disDest").innerHTML = '';
+  document.getElementById("disStart").innerHTML = '';
+  document.getElementById("disEnd").innerHTML = '';
+  document.getElementById("disDur").innerHTML = '';
+  document.getElementById("disTill").innerHTML = '';
+  alert("Your trip has been cancelled.")
+  
+});
