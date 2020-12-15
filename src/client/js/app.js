@@ -31,26 +31,6 @@ export const getWeather = async () => {
 
 // Create date
 
-export const getDate = () =>{
-  let d = new Date();
-  let min = '';
-  let hour = '';
-  let ampm = '';
-  if (d.getHours() > 12){
-    hour = d.getHours() - 12;
-    ampm = ' PM';
-  }else{
-    hour = d.getHours();
-    ampm = ' AM';
-  };
-  if (d.getMinutes() < 10){
-    min = '0';
-  }else{
-    min = '';
-  };
-  newDate = d.getMonth()+'/'+ d.getDate()+'/'+ d.getFullYear() + ' | ' + hour + ':' + min + d.getMinutes() + ampm;
-};
-
 //Post data to the server
 
 export const postData = async ( url = '', data = {}) => {
