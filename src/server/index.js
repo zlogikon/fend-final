@@ -44,14 +44,14 @@ app.get('/all', sendUserData)
 
 function sendUserData (req, res) {
   res.send(projectData);
-  console.log(projectData);
+  //console.log(projectData);
 };
 
 app.post('/add', addUserData)
 
 function addUserData (req, res) {
     const reqData = req.body;
-    //console.log(reqData)
+    console.log(reqData)
 
     //geonames
     //getWeather
