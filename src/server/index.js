@@ -1,9 +1,6 @@
 // Setup empty JS object to act as endpoint for all routes
 
-let data1 = 'This is data1'
-let data2 = 'This is data2'
-let data3 = 'This is data3'
-let projectData = {data1, data2, data3};
+let projectData = {};
 
 
 // Require Express to run server and routes
@@ -50,8 +47,8 @@ function sendUserData (req, res) {
 app.post('/add', addUserData)
 
 function addUserData (req, res) {
-    const reqData = req.body;
-    console.log(reqData)
+    projectData = req.body;
+    console.log(projectData)
 
     //geonames
     //getWeather
