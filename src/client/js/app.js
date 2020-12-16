@@ -1,25 +1,28 @@
-export const cancel = () => {
-  document.getElementById("disDest").innerHTML = '';
-  document.getElementById("disStart").innerHTML = '';
-  document.getElementById("disEnd").innerHTML = '';
-  document.getElementById("disDur").innerHTML = '';
-  document.getElementById("disTill").innerHTML = '';
-  alert("Your trip has been cancelled.")
+let startDate = "";
+let endDate = "";
+let destination = "";
+let hoursTill = "";
+let duration = "";
+
+export const getReady = async () => {
+  console.log('Getting ready to post....')
   
 };
 
 export const formHandler = async (event) => {
   event.preventDefault();
+  const d = new Date();
 
   // Data collected from user
-  const startDate = new Date(document.getElementById('start').value);
-  const endDate = new Date(document.getElementById('end').value);
-  const destination = document.getElementById('dest').value;
+  startDate = new Date(document.getElementById('start').value);
+  endDate = new Date(document.getElementById('end').value);
+  destination = document.getElementById('dest').value;
+  duration = (endDate.getTime() - startDate.getTime())/60000/60/24;
+  hoursTill = (startDate.getTime() - d.getTime())/60000/60/24;
      
   // Dates used in results
-  const d = new Date();
-  const duration = (endDate.getTime() - startDate.getTime())/60000/60/24;
-  const hoursTill = (startDate.getTime() - d.getTime())/60000/60/24;
+  
+  
   const d1 = startDate.toUTCString().slice(0,17);
   const d2 = endDate.toUTCString().slice(0,17);
 
@@ -31,44 +34,46 @@ export const formHandler = async (event) => {
   //console.log(startDate);
   //console.log(endDate);
 
-  document.getElementById("disDest").innerHTML = `Destination: ${destination}`;
-  document.getElementById("disStart").innerHTML = `Start Date: ${d1}`
-  document.getElementById("disEnd").innerHTML = `End Date: ${d2}`
-  document.getElementById("disDur").innerHTML = `Trip Duration: ${(duration)} days`;
-  document.getElementById("disTill").innerHTML = `Countdown: About ${Math.ceil(hoursTill)} days`;
-
   console.log('Form Handled!!')
 
-  const dataForServser = {destination,startDate,endDate}
+  const dataForServer = {destination,startDate,endDate}
 
-  postData('http://localhost:8081/add', dataForServser)
-      .then(() => {
-        updateUI()
-        });
+
+  getReady()
+  .then(() => {
+    //console.log(data)
+    postData('http://localhost:8081/add', dataForServer)
+    console.log('Data posted. Updating UI....')
+  })
+  .then(() => {
+    updateUI()
+  })
+
+  
   
   
 };
 
 const postData = async (url, data)=>{
-  console.log('Data to server: ',data)
-    const post = await fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data), // body data type must match "Content-Type" header        
-    });
+  //console.log('Data to server: ',data)
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data), // body data type must match "Content-Type" header        
+  });
 
     try {
-      const newData = await post.json();
-      //console.log('Data okay!',newData);
+      const newData = await response.json();
+      console.log('Data okay!', newData);
       return newData
     }catch(error) {
-      console.log("JSON confirmation error", error);
-      URLResult.innerHTML = "Please confirm the URL is a working webpage"
-    }
-}
+    console.log("error", error);
+    
+    }    
+};
     
 const updateUI = async () => {
   console.log('Ready to update UI')
@@ -77,16 +82,28 @@ const updateUI = async () => {
   try{
       const allData = await request.json()
       
-      const conf = allData.confidence;
-      const subj = allData.subjectivity;
-      const score = allData.score_tag;
+      console.log(allData)
+
       //console.log(allData)
        
-      document.getElementById("conf").innerHTML = `Confidence: ${conf}`
-      document.getElementById("subj").innerHTML = `Subjectivity: ${subj}`;
-      document.getElementById("score").innerHTML = `Polarity Score: ${Client.scoreUpdate(score)}`;
+      document.getElementById("disDest").innerHTML = `Destination: ${destination}`;
+      document.getElementById("disStart").innerHTML = `Start Date: ${startDate.toUTCString().slice(0,17)}`
+      document.getElementById("disEnd").innerHTML = `End Date: ${endDate.toUTCString().slice(0,17)}`
+      document.getElementById("disDur").innerHTML = `Trip Duration: ${(duration)} days`;
+      document.getElementById("disTill").innerHTML = `Countdown: About ${Math.ceil(hoursTill)} days`;
       
     }catch(error){
       console.log("updateUI error", error)
   } 
 }
+
+export const cancel = () => {
+  document.getElementById("disDest").innerHTML = '';
+  document.getElementById("disStart").innerHTML = '';
+  document.getElementById("disEnd").innerHTML = '';
+  document.getElementById("disDur").innerHTML = '';
+  document.getElementById("disTill").innerHTML = '';
+  alert("Your trip has been cancelled.")
+  
+};
+
