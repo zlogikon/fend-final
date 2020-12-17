@@ -61,7 +61,7 @@ const postData = async (url, data)=>{
     
 const updateUI = async () => {
   console.log('Ready to update UI')
-  const request = await fetch ('http://localhost:8081/all')
+  const request = await fetch('http://localhost:8081/all')
   
   try{
       const allData = await request.json()
