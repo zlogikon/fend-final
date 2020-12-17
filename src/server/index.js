@@ -1,34 +1,16 @@
-// Setup empty JS object to act as endpoint for all routes
+let projectData = {}; // Setup empty JS object to act as endpoint for all routes
 
-let projectData = {};
-
-
-// Require Express to run server and routes
-const express = require('express');
-
-// Start up an instance of app
+const express = require('express'); // Require Express to run server and routes
 const app = express();
-
-//Dependencies
-
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
-/* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// Cors for cross origin allowance
-
-const cors = require('cors');
-app.use(cors());
-
-// Initialize the main project folder
-
 app.use(express.static('dist'));
 
-// Setup Server
-
+app.use(express.static('dist'));
 const port = 8081;
 
 const server = app.listen(port, running);
@@ -36,6 +18,8 @@ const server = app.listen(port, running);
 function running(){
   console.log(`Server is running on localhost:${port}`);
 }
+
+// Routes
 
 app.get('/all', sendUserData)
 
@@ -47,10 +31,15 @@ function sendUserData (req, res) {
 app.post('/add', addUserData)
 
 function addUserData (req, res) {
-    projectData = req.body;
-    console.log(projectData)
+  projectData = req.body;
+  console.log(projectData)
+  res.send(JSON.stringify(projectData));
 
-    //geonames
-    //getWeather
-    //pixabay
+
+
+// APIs
+
+  //geonames
+  //getWeather
+  //pixabay
 };
