@@ -7,11 +7,11 @@ The project was designed to give experience working with the following technolog
 <ul>
 <li>Webpack</li>
 <li>Node.js</li>
-<li>web APIs</li>
-<li>responsive design</li>
+<li>Web APIs</li>
+<li>Responsive web design</li>
 <li>Sass stylesheets</li>
 <li>Jest testing</li>
-<li>service workers</li>
+<li>Service workers to allow offline access</li>
 </ul>
 
 ## Overview
@@ -26,7 +26,7 @@ This project takes 3 items of user input: a destination, a travel start date, an
 
 ## How to run the project
 
-Note: I used and highly recommend others use VS Code to to write and run this project
+Note: I used <a href='https://code.visualstudio.com/'>Visual Studio Code</a> to create this project and I highly recommend others use it to run the project as well.
 
 <ol>
 <li>Clone this repo to your local machine</li>
