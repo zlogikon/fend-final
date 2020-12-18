@@ -30,9 +30,9 @@ Note: I used <a href='https://code.visualstudio.com/'>Visual Studio Code</a> to 
 
 <ol>
 <li>Clone this repo to your local machine</li>
-<li>Run npm install in the needed packages which are listed in full in the package.json file</li>
+<li>Run npm install for the required packages which are listed in full in the package.json file</li>
 <li>Build the production server with npm run build-prod</li>
-<li>Create a .env file in root and add API keys for the APIs listed above</li>
+<li>Create a .env file in the root directory and add API keys for the APIs listed above.</li>
 <li>Start the server with npm start</li>
-<li>The server should run on localhost:8081</li>
+<li>The server should run on localhost:8081 in your web browser</li>
 </ol>
