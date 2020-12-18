@@ -19,7 +19,9 @@ This project takes 3 items of user input: a destination, a travel start date, an
 
 ## APIs used in this project
 <a href="http://www.geonames.org/export/web-services.html">Geonames</a>
+
 <a href="https://www.weatherbit.io/">Weatherbit</a>
+
 <a href="https://pixabay.com/api/docs/">Pixabay</a>
 
 ## How to run the project
