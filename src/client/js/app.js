@@ -33,7 +33,7 @@ export const formHandler = async (event) => {
 
   console.log('Data Posted.')
 
-  await updateUI()
+  
   
   
 };
@@ -52,6 +52,7 @@ export const postData = async (url, data)=>{
     try {
       const newData = await response.json();
       console.log('Data okay!', newData);
+      updateUI()
       return newData
     }catch(error) {
     console.log("error", error);
@@ -67,12 +68,23 @@ export const updateUI = async () => {
       const allData = await request.json()
       
       console.log(allData)
-    
+
+      document.getElementById("upcoming").innerHTML = `Your upcoming trip begins in about ${Math.ceil(daysTill)} day(s)`;
       document.getElementById("disDest").innerHTML = `Destination: ${allData.destName}`;
+      document.getElementById("disCoun").innerHTML = `Country: ${allData.destCoun}`;
+      document.getElementById("disPic").innerHTML = `<img src=${allData.destPic}/>`;
       document.getElementById("disStart").innerHTML = `Start Date: ${d1}`
       document.getElementById("disEnd").innerHTML = `End Date: ${d2}`
       document.getElementById("disDur").innerHTML = `Trip Duration: ${(duration)} days`;
-      document.getElementById("disTill").innerHTML = `Countdown: About ${Math.ceil(daysTill)} day(s)`;
+
+      if (daysTill < 7){
+        document.getElementById("disHigh").innerHTML = `Current high temp: ${(allData.dest1Day[0])}`;
+        document.getElementById("disLow").innerHTML = `Current low temp: ${(allData.dest1Day[1])}`;
+
+      }else{
+        document.getElementById("disHigh").innerHTML = `Expected high temp: ${(allData.dest1Day[0])}`;
+        document.getElementById("disLow").innerHTML = `Expected low temp: ${(allData.dest1Day[1])}`;
+      }
       
     }catch(error){
       console.log("updateUI error", error)
@@ -86,8 +98,8 @@ export const getDate = async () =>{
   duration = (endDate.getTime() - startDate.getTime())/60000/60/24;
   daysTill = (startDate.getTime() - d.getTime())/60000/60/24;
 
-  d1 = `${startDate.getMonth()}/${startDate.getDate()}/${startDate.getFullYear()}`
-  d2 = `${endDate.getMonth()}/${endDate.getDate()}/${endDate.getFullYear()}`
+  d1 = `${startDate.getMonth()+1}/${startDate.getDate()}/${startDate.getFullYear()}`
+  d2 = `${endDate.getMonth()+1}/${endDate.getDate()}/${endDate.getFullYear()}`
 
   let newDate = d.getMonth()+'/'+ d.getDate()+'/'+ d.getFullYear()
 };
@@ -95,11 +107,15 @@ export const getDate = async () =>{
 export const cancel = () => {
   let qq = confirm("Are you sure you want to cancel your trip?")
   if (qq == true){
+    document.getElementById("upcoming").innerHTML = `You have no upcoming trips`;
     document.getElementById("disDest").innerHTML = '';
     document.getElementById("disStart").innerHTML = '';
     document.getElementById("disEnd").innerHTML = '';
     document.getElementById("disDur").innerHTML = '';
-    document.getElementById("disTill").innerHTML = '';
+    document.getElementById("disPic").innerHTML = '';
+    document.getElementById("disCoun").innerHTML = '';
+    document.getElementById("disHigh").innerHTML = '';
+    document.getElementById("disLow").innerHTML = '';
     alert("Yourtrip has been cancelled.")
   }else{
 
