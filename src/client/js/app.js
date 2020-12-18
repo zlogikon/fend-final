@@ -29,7 +29,7 @@ export const formHandler = async (event) => {
 
   await postData('http://localhost:8081/add', dataForServer )
 
-  const getData = await fetch(`http://localhost:8081/all`);
+  const getData = await fetch(`http://localhost:8081/all`)
 
   console.log('Data Posted.')
 
@@ -38,7 +38,7 @@ export const formHandler = async (event) => {
   
 };
 
-const postData = async (url, data)=>{
+export const postData = async (url, data)=>{
   //console.log('Data to server: ',data)
   const response = await fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -59,16 +59,16 @@ const postData = async (url, data)=>{
     }    
 };
     
-const updateUI = async () => {
+export const updateUI = async () => {
   console.log('Ready to update UI')
   const request = await fetch('http://localhost:8081/all')
   
   try{
       const allData = await request.json()
       
-      //console.log(allData)
+      console.log(allData)
     
-      document.getElementById("disDest").innerHTML = `Destination: ${allData.destination}`;
+      document.getElementById("disDest").innerHTML = `Destination: ${allData.destName}`;
       document.getElementById("disStart").innerHTML = `Start Date: ${d1}`
       document.getElementById("disEnd").innerHTML = `End Date: ${d2}`
       document.getElementById("disDur").innerHTML = `Trip Duration: ${(duration)} days`;
@@ -79,11 +79,7 @@ const updateUI = async () => {
   } 
 }
 
-
-
-
-
-const getDate = async () =>{
+export const getDate = async () =>{
 
   let d = new Date();
 
@@ -95,13 +91,6 @@ const getDate = async () =>{
 
   let newDate = d.getMonth()+'/'+ d.getDate()+'/'+ d.getFullYear()
 };
-
-
-
-
-
-
-
 
 export const cancel = () => {
   let qq = confirm("Are you sure you want to cancel your trip?")
