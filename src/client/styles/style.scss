@@ -1,87 +1,91 @@
+$font-color: rgb(70, 70, 70);
+$gray: rgb(161, 161, 161);
+
 body{
-    background: #fffff8;
+    background: $font-color;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 #app{
     display: grid;
-    grid-template-rows:repeat(6, auto);
+    grid-template-rows:repeat(7, auto);
     grid-template-areas:
       "header"
       "dest"
       "start"
       "end"
       "genBttn"
-      "journal";
+      "journal"
+      "cancel";
     width:400px;
     margin: auto;
     background: #ffffff;
-    color: #3d3d3d;
+    color: $font-color;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
+    padding: 10px;
 }
 
 .title {
     padding: 5px;
 }
 
-.entry{
-    background: rgba(59, 74, 107, .4);
-}
 
-#date{
-    padding: 5px;
-
-}
-
-#temp{
-    padding: 5px;
-
-}
-
-#content{
-    padding: 5px;
-
-}
-
-#header {
-    grid-area:header;
-}
-
-#zipcode {
-    grid-area:zip;
-}
-
-#feel {
-    grid-area:feel;
-}
-
-#button {
-    grid-area:button;
-}
 
 #journal {
     grid-area:journal;
-    margin: 50px 0px;
+    margin: 20px 0px;
     padding: 10px;
     color:white;
+    background-color: $gray;
+}
 
+#disPic {
+    object-fit:cover;
+    width: 380px;
+}
+
+#genBttn{
+    width: 100%;
+    height: 100px;
+    background: #2600ff;
+    color: white;
+    font-size: 26px;
+    font-family: 'Oswald', sans-serif;
+    border: none;
+    box-shadow: 2px 4px 5px #444;
+}
+
+#canBttn{
+    width: 100%;
+    height: 50px;
+    background: #ffffff;
+    color: $font-color;
+    font-size: 16px;
+    font-family: 'Oswald', sans-serif;
+    border: none;
+    
 }
 
 
-
 /*  Basic Styling To Override Default For Basic HTML Elements */
+img {
+    width: 100%;
+    height: auto;
+}
+
+
 label{
     display:block;
-    font-size: 27px;
+    font-size: 20px;
 }
 
 input{
     display:block;
     width: 95%;
-    background:#22b2da;
+    background: $gray;
     color:white;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
@@ -89,16 +93,8 @@ input{
     padding:5px;
 }
 
-button{
-    width: 100%;
-    height: 100px;
-    background: #680000;
-    color: #f0d43a;
-    font-size: 26px;
-    font-family: 'Oswald', sans-serif;
-    border: none;
-    box-shadow: 2px 4px 5px #444;
-}
+
+
 h1{
     font-size: 36px;
 }
@@ -137,3 +133,31 @@ button:focus {
     font-family: 'Oswald', sans-serif;
 
 } 
+
+/* Medium Screens */
+@media (min-width:801px) {
+
+#app{
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows: 100px 100px 100px 100px 100px auto;
+    grid-template-areas:
+        "header journal"
+        "dest journal"
+        "start journal"
+        "end journal"
+        "genBttn journal"
+        "cancel journal"
+    ;
+    width:800px;
+    
+
+
+}
+
+#journal {
+    margin: 0px 0px;
+    padding: 50px 10px;
+    
+}
+}
