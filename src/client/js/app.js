@@ -29,7 +29,9 @@ export const formHandler = async (event) => {
 
   await postData('http://localhost:8081/add', dataForServer )
 
-  const getData = await fetch(`http://localhost:8081/all`)
+  await delayUI()
+
+  //const getData = await fetch(`http://localhost:8081/all`)
 
   console.log('Data Posted.')
 
@@ -52,7 +54,7 @@ export const postData = async (url, data)=>{
     try {
       const newData = await response.json();
       console.log('Data okay!', newData);
-      updateUI()
+      
       return newData
     }catch(error) {
     console.log("error", error);
@@ -61,7 +63,7 @@ export const postData = async (url, data)=>{
 };
     
 export const updateUI = async () => {
-  console.log('Ready to update UI')
+  
   const request = await fetch('http://localhost:8081/all')
   
   try{
@@ -121,4 +123,19 @@ export const cancel = () => {
 
   }
 };
+
+const delayUI = async ()=> {
+  console.log('Ready to update UI....')
+  console.log('Waiting.......')
+  document.getElementById("upcoming").innerHTML = `Loading. Please wait....`;
+  document.getElementById("disDest").innerHTML = '';
+  document.getElementById("disStart").innerHTML = '';
+  document.getElementById("disEnd").innerHTML = '';
+  document.getElementById("disDur").innerHTML = '';
+  document.getElementById("disPic").innerHTML = '';
+  document.getElementById("disCoun").innerHTML = '';
+  document.getElementById("disHigh").innerHTML = '';
+  document.getElementById("disLow").innerHTML = '';
+  setTimeout(updateUI, 5000);
+}
 
